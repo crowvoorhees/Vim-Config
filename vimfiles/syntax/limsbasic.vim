@@ -1,0 +1,281 @@
+" Vim syntax file
+" Language:	LIMSBasic
+" Maintainer:	Mark Raymond <mark.alan.raymond@gmail.com>
+" Originator:	Mark Raymond <mark.alan.raymond@gmail.com>
+" Created:	2016-Mar-02
+" Updated:	2016-Mar-02
+" Description:  A vim file to handle LabWare v7 LIMSBasic syntax.
+" Notes:
+"	to auto-load syntax, save source as filetype *.lb, and 
+"	add the following line to filetype.vim:
+"	
+"		au BufNewFile,BufRead *.lb	setf limsbasic
+"		
+if exists("b:current_syntax")
+  finish
+endif
+"
+"	Be sure to turn on the "case ignore" since LIMSBasic
+"	supports both upper as well as lowercase letters.
+"
+syn case ignore
+"
+" LIMSBasic keywords
+"
+syn keyword limsbasicStatement		DebugLineNumber DebugRoutine E Empty Error
+syn keyword limsbasicStatement		False GroupName Nil Null True User
+syn keyword limsbasicStatement		NOT AND OR
+"
+syn match limsbasicIdentifier		"\<[a-zA-Z_][a-zA-Z0-9_]*\>"
+syn match limsbasicGenericFunction	"\<[a-zA-Z_][a-zA-Z0-9_]*\>\s*("me=e-1,he=e-1
+"
+" Function list
+"
+syn keyword limsbasicBuiltInFunction Abort Abs ActiveFolderSamples AdHocCharge AddAdHocProjectResult
+syn keyword limsbasicBuiltInFunction AddAdHocResult AddEventHandler AddFlag AddInvestigationItem AddLotSource
+syn keyword limsbasicBuiltInFunction AddMenu AddObjectToInvestigation AddObjectToObjectGroup AddObjectToObjectGroup AddOrderItem
+syn keyword limsbasicBuiltInFunction AddPdfTextStamp AddProjectItem AddQCToBatch AddResultToBatch AddResultsToBatch
+syn keyword limsbasicBuiltInFunction AddRowToUserGrid AddSampleToBatch AddSampleToLot AddSampleToOrder AddTestToBatch
+syn keyword limsbasicBuiltInFunction AddTestsToBatch Alert AliquotSample AliquotTest AliquotTestsOnSamples
+syn keyword limsbasicBuiltInFunction AnalysisApproval AnalysisRemoveApproval AppendToContactNote AppendToHTMLNote AppendToRTFNote
+syn keyword limsbasicBuiltInFunction ApproveObject ArcCos ArcSin ArcTan ArrayConvertToSingleDim
+syn keyword limsbasicBuiltInFunction ArrayDistinctValues ArrayFilter ArrayFilterIndex ArrayFromCSVFile ArrayFromCSVString
+syn keyword limsbasicBuiltInFunction ArrayIndexSubset ArrayInitialize ArrayJoin ArrayMax ArrayMerge
+syn keyword limsbasicBuiltInFunction ArrayMin ArrayOfSubstrings ArraySearchColumns ArraySearchRows ArraySortIndex
+syn keyword limsbasicBuiltInFunction ArraySplit ArraySubset ArrayToCSV ArrayToCSVString ArrayTranspose
+syn keyword limsbasicBuiltInFunction ArrayWithName AsciiSum AssignOptionalGroups AssignOptionalResults AssignSpecTests
+syn keyword limsbasicBuiltInFunction AssignTest AssignTestList AssignTestToSamples AssignTestWithVariation AssignTestandResultNumbers
+syn keyword limsbasicBuiltInFunction AssignedGroups AuditBatchReport AuditInventoryReport AuditInvestigationReport AuditLotReport
+syn keyword limsbasicBuiltInFunction AuditProjectReport AuditProtocolReport AuditReasonForObject AuditSampleReport AuditTableReport
+syn keyword limsbasicBuiltInFunction AuthorizeBatchResult AuthorizeProjectResult AuthorizeResult AuthorizeSample AuthorizeTest
+syn keyword limsbasicBuiltInFunction Ave BackgroundSubroutine BackgroundWorkstationName Base64Decode Base64Encode
+syn keyword limsbasicBuiltInFunction BatchAction BatchCalculate BatchObjectType BatchObjects BatchPosition
+syn keyword limsbasicBuiltInFunction Beep BitAnd BitAt BitOr BitShift
+syn keyword limsbasicBuiltInFunction BitXor Breakpoint BrowseForRecord BrowseSelect BrowseSelectSample
+syn keyword limsbasicBuiltInFunction BulkInsert CalculateResult Calibrate CanAccessFunction CanAuthorizeResult
+syn keyword limsbasicBuiltInFunction CanAuthorizeSample CanAuthorizeTest CanCancelResult CanCancelSample CanCancelTest
+syn keyword limsbasicBuiltInFunction CanReactivateSample CanReceiveSample CanRejectResult CanRejectSample CanRejectTest
+syn keyword limsbasicBuiltInFunction CanReleaseSample CanRestoreResult CanRestoreSample CanRestoreTest CanUnreleaseSampleAsc
+syn keyword limsbasicBuiltInFunction CancelResult CancelSample CancelTest CellText ChangePassword
+syn keyword limsbasicBuiltInFunction ChangeSampleLocation ChangeSigningPassword ChargeProject CheckInstruments CheckLimits
+syn keyword limsbasicBuiltInFunction CheckSampleRules CheckSpec CheckToken Chr ClearArray
+syn keyword limsbasicBuiltInFunction ClearComm ClearInterpreterObjects ClearMemoryIncrement ClearSelects ClientName
+syn keyword limsbasicBuiltInFunction ClipboardGet ClipboardSet CloseBatch CloseComm CloseCrystalReportWindow
+syn keyword limsbasicBuiltInFunction CloseInvestigation CloseLot CloseOrder CloseProgressDialog CloseProject
+syn keyword limsbasicBuiltInFunction CloseSMTPConnection CloseVisualWorkflow CloseWebService CloseWindow CodeSearch
+syn keyword limsbasicBuiltInFunction CompareDates CompareNumbers CompositeSamples ComputeAge ConfirmUser
+syn keyword limsbasicBuiltInFunction ContextTranslate ContextTranslateSQL ConvertHTMLToText ConvertRTFToText ConvertResultToNumeric
+syn keyword limsbasicBuiltInFunction ConvertResultToText ConvertTextToRTF ConvertToPDF ConvertUnits CopyProject
+syn keyword limsbasicBuiltInFunction CopySample CopyTableRecord Correlation Cos CreateAdHocFolder
+syn keyword limsbasicBuiltInFunction CreateAdHocFolder CreateBatch CreateContact CreateContainerAliquots CreateDialog
+syn keyword limsbasicBuiltInFunction CreateFence CreateFolder CreateFolder CreateGridDialog CreateInvestigation
+syn keyword limsbasicBuiltInFunction CreateLIMSLog CreateLot CreateLotResult CreateLotSamplingPoint CreateMessage
+syn keyword limsbasicBuiltInFunction CreateObjectGroup CreateObjectGroup CreateOrder CreatePerson CreateProject
+syn keyword limsbasicBuiltInFunction CreateSchema CreateStandardReagent CreateSupportLog CreateWebService CrystalSetTableLocations
+syn keyword limsbasicBuiltInFunction CurDir CurrentActiveLIMSWindow CurrentFolderObjects CurrentProcessName CurrentUserRole
+syn keyword limsbasicBuiltInFunction CvDate CvDateTime CvTime DDEExecute DDEPoke
+syn keyword limsbasicBuiltInFunction DDERequest DLL DLLCall DLLClose DLLCreateStructure
+syn keyword limsbasicBuiltInFunction DLLDefineStructure DLLOpen DLLReadStructure DLLReleaseStructure DLLStructure
+syn keyword limsbasicBuiltInFunction DLLWriteStructure DataBaseType Date DateAdd DateCentury
+syn keyword limsbasicBuiltInFunction DateDayOfMonth DateDayOfWeek DateDayOfYear DateDaysInMonth DateDaysInYear
+syn keyword limsbasicBuiltInFunction DateDifference DateFormat DateMonthOfYear DateSeparator DateTime
+syn keyword limsbasicBuiltInFunction DateTimeAdd DateTimeDifference DateTimeFromSeconds DateTimeHours DateTimeMinutes
+syn keyword limsbasicBuiltInFunction DateTimeSeconds DateWeekOfYear DateYear DayOfWeek DeactivateExpiredStandard
+syn keyword limsbasicBuiltInFunction DebugMessage DebugOff DebugOn DebuggingSet Decrypt
+syn keyword limsbasicBuiltInFunction DefaultBatchName DefaultInvestigationName DefaultLotNumber DefaultProjectName DefaultSampleNumber
+syn keyword limsbasicBuiltInFunction DeleteContactNote DeleteFolder DeleteFolder DirExists DirFiles
+syn keyword limsbasicBuiltInFunction DirKill DirNew DirZip DisableDataBaseEvents DisableMenu
+syn keyword limsbasicBuiltInFunction DisableUser DisableWindow DisplayHTMLNote DisplayRTFNote DisplayReport
+syn keyword limsbasicBuiltInFunction DispositionLot DnCreateObject DnGetProperty DnInvokeMethod DnInvokeStaticMethod
+syn keyword limsbasicBuiltInFunction DnLoadAssembly DnLoadAssemblyFileName DnLoadAssemblyFullName DnSetProperty ERecordPrompt
+syn keyword limsbasicBuiltInFunction ESignatureRecords EditFlag EditHTMLNote EditRTFNote EnableDataBaseEvents
+syn keyword limsbasicBuiltInFunction EnableMenu EnableUser EnableWindow Encrypt EncryptPDF
+syn keyword limsbasicBuiltInFunction EncryptPassword Equals EraseCache ExcelClose ExcelGetArray
+syn keyword limsbasicBuiltInFunction ExcelGetValue ExcelQuit ExcelSave ExcelSetArray ExcelSetValue
+syn keyword limsbasicBuiltInFunction Execute ExecuteQueryTag ExecuteVisualWorkflowScript Exp ExportObject
+syn keyword limsbasicBuiltInFunction ExportObjectXML ExportProjectXML ExportSampleXML ExtractNumber ExtractNumbers
+syn keyword limsbasicBuiltInFunction FastCancelSamples FieldDataType FileAtEnd FileBottom FileClose
+syn keyword limsbasicBuiltInFunction FileContents FileContentsOfZip FileCopy FileDate FileExists
+syn keyword limsbasicBuiltInFunction FileFindReplace FileIsOpen FileKill FileNew FileNormal
+syn keyword limsbasicBuiltInFunction FileOpen FileRead FileReadOnly FileRename FileSend
+syn keyword limsbasicBuiltInFunction FileSize FileTime FileTop FileUnzip FileWrite
+syn keyword limsbasicBuiltInFunction FileWriteContents FileZip FindResultCell FolderObjects FolderObjects
+syn keyword limsbasicBuiltInFunction FolderResults FolderResults FormatExponential FullReactivateSample GUID
+syn keyword limsbasicBuiltInFunction GenerateObjectXML GenerateVisualWorkflow GeomMean GetAccessFunctionIds GetAllApplicationWindowNames
+syn keyword limsbasicBuiltInFunction GetBatchSampleResult GetClientConfigurationSetting GetComputerName GetConstant GetDBFile
+syn keyword limsbasicBuiltInFunction GetDescriptionForLinkedField GetGlobalVariable GetGroups GetIncrement GetLabelPrinterConfig
+syn keyword limsbasicBuiltInFunction GetLabelPrinterConfigFromPath GetLastSampleGroupNumber GetMemoryIncrement GetModuleVersion GetPDFTags
+syn keyword limsbasicBuiltInFunction GetReportsDir GetResultsFormattedEntry GetRoles GetSeasons GetSessionID
+syn keyword limsbasicBuiltInFunction GetTableIncrement GoToBatchPosition GoToCell GroupClause HasChanges
+syn keyword limsbasicBuiltInFunction HasDebuggingPoints HasGroupAccess HideWindow HighWord ImportFile
+syn keyword limsbasicBuiltInFunction ImportLotResults ImportObject ImportParserPollDir ImportXMLObject InControl
+syn keyword limsbasicBuiltInFunction InSpec InStr InputBox InputPassword InsertTable
+syn keyword limsbasicBuiltInFunction InstrumentApproval InstrumentRemoveApproval Interval IntervalSeconds InvokeWebService
+syn keyword limsbasicBuiltInFunction IpCloseLink IpListenerAck IpListenerStart IpListenerStop IpSend
+syn keyword limsbasicBuiltInFunction IsBackgroundProcess IsCellLocked IsDate IsEmpty IsFraction
+syn keyword limsbasicBuiltInFunction IsHoliday IsInterval IsNull IsNumeric IsODBCOpen
+syn keyword limsbasicBuiltInFunction IsTerminalServer IsTime IsUserCertifiedForAnalysis IsUserCertifiedForInstrument IsWeb
+syn keyword limsbasicBuiltInFunction LCase Left Len ListEntryDescription ListEntryDescriptionsArray
+syn keyword limsbasicBuiltInFunction ListEntryDescriptionsCSVString LoadDebuggingSet LockOrder Log LogBase
+syn keyword limsbasicBuiltInFunction LogError LogOut LogSample LowWord MailReport
+syn keyword limsbasicBuiltInFunction MakeSubSample MandatoryField Max Median MergePdfFiles
+syn keyword limsbasicBuiltInFunction MergePdfs Mid Min MoveBatchObject MsgBox
+syn keyword limsbasicBuiltInFunction MsgboxHtml MultiColumnSelectFromArray MultiSelectDialog MultiSelectFromArray NLS
+syn keyword limsbasicBuiltInFunction NextWorkDate Not NotEmpty ODBCClose ODBCColumns
+syn keyword limsbasicBuiltInFunction ODBCDateTimeStamp ODBCGetFile ODBCName ODBCOpen ODBCOpenWithConnectString
+syn keyword limsbasicBuiltInFunction ODBCQuery ODBCSourceNames ODBCWriteFile OleCreate OleGetProperty
+syn keyword limsbasicBuiltInFunction OleInvokeMethod OleRelease OleReleaseAll OleSetProperty OpenAddressBook
+syn keyword limsbasicBuiltInFunction OpenAlertManager OpenAnalysisWizard OpenBatchManager OpenBatchSampleLogin OpenCollectData
+syn keyword limsbasicBuiltInFunction OpenComm OpenContactManager OpenCrystalReportWindow OpenDataExplorer OpenFlagDialog
+syn keyword limsbasicBuiltInFunction OpenFolder OpenFolderGroup OpenGridProductEditor OpenGridResultEntry OpenGridReview
+syn keyword limsbasicBuiltInFunction OpenGridSampleLogin OpenGroupSampleLogin OpenHtmlDisplayDialog OpenInstrumentManager OpenInventoryManager
+syn keyword limsbasicBuiltInFunction OpenInvestigationManager OpenLotManager OpenModifySamples OpenMultiSampleTestEditor OpenObjectGroupManager
+syn keyword limsbasicBuiltInFunction OpenOrderManager OpenPDFWindow OpenParentChildrenRecordEditor OpenParserInterface OpenProductSpecificationsDesigner
+syn keyword limsbasicBuiltInFunction OpenProgressDialog OpenProjectManager OpenRecord OpenRecordGridEditor OpenResultEntry
+syn keyword limsbasicBuiltInFunction OpenReviewWindow OpenSampleInterface OpenScheduleWindow OpenSearchDialog OpenStandardReagentManager
+syn keyword limsbasicBuiltInFunction OpenStoredQueryManager OpenTable OpenTestEditor OpenTextEditor OpenVisualWorkflow
+syn keyword limsbasicBuiltInFunction OptionalTests OutOfControl OutOfSpec ParserCopyChars ParserCopyLines
+syn keyword limsbasicBuiltInFunction ParserCopyTo ParserCopyWords ParserCreate ParserFind ParserGetDataFields
+syn keyword limsbasicBuiltInFunction ParserGotoMarker ParserReset ParserSetMarker ParserSkipChars ParserSkipWords
+syn keyword limsbasicBuiltInFunction Percentile PerformAnyWindowMethod PerformMaintenance PerformService PerformWindowMenu
+syn keyword limsbasicBuiltInFunction PerformWindowMethod PlateWindowAboveLabels PlateWindowBelowLabels PlateWindowCircleRadius PlateWindowClose
+syn keyword limsbasicBuiltInFunction PlateWindowColors PlateWindowHighlights PlateWindowHorizontalDividerIncrement PlateWindowLineThickness PlateWindowOpen
+syn keyword limsbasicBuiltInFunction PlateWindowShowGridLines PlateWindowTextLeft PlateWindowTextTop PlateWindowVerticalDividerIncrement PostSubroutine
+syn keyword limsbasicBuiltInFunction PrettyString PrintArray PrintCrystalReport PrintFile PrintFileRaw
+syn keyword limsbasicBuiltInFunction PrintLabels PrintMultipleLabels PrintPDF PrintRaw PrintReport
+syn keyword limsbasicBuiltInFunction PrinterNames ProductSpecTests ProductSpecTestsList ProjectResults PromptForAuditReason
+syn keyword limsbasicBuiltInFunction PromptForConstants PromptForDate PromptForDateTime PromptForDirectory PromptForFile
+syn keyword limsbasicBuiltInFunction PromptForIdentity PromptForInteger PromptForListEntry PromptForLongText PromptForNumber
+syn keyword limsbasicBuiltInFunction PromptForPrinter PromptForYesNo PutDBFile PutInstrumentOnLine PutSampleOnHold
+syn keyword limsbasicBuiltInFunction Range ReactivateBatchResult ReactivateSample ReactivateTest ReadComm
+syn keyword limsbasicBuiltInFunction RebuildNLS ReceiveSample ReceiveSamples ReduceInventory RefreshLot
+syn keyword limsbasicBuiltInFunction RefreshSample RefreshTest RefreshVisualWorkflow RegistryValue RejectBatchResult
+syn keyword limsbasicBuiltInFunction RejectProjectResult RejectResult RejectSample RejectTest ReleaseSample
+syn keyword limsbasicBuiltInFunction ReleaseTest ReloadConstants ReloadScheduler RemoveAccessFunctionIds RemoveFolderManagerTab
+syn keyword limsbasicBuiltInFunction RemoveGroups RemoveInventory RemoveLotSource RemoveMenu RemoveObjectFromInvestigation
+syn keyword limsbasicBuiltInFunction RemoveOptionalGroups RemoveOrderItem RemoveProjectItem RemoveProjectManagerTab RemoveResultFromBatch
+syn keyword limsbasicBuiltInFunction RemoveRoles RemoveRowFromUserGrid RemoveSampleFromBatch RemoveSampleFromOrder RemoveTableRecord
+syn keyword limsbasicBuiltInFunction RemoveTest RemoveTestFromBatch Replace ReplacePDFTags ReplicateResult
+syn keyword limsbasicBuiltInFunction ReplicateTest Resample ResampleStandard ResetAuditReason ResetLabelPrinterConfig
+syn keyword limsbasicBuiltInFunction ResetMenuConfig ResetPassword ResetResult ResetSelectsForTable ResetToolbarConfig
+syn keyword limsbasicBuiltInFunction RestoreInvestigation RestoreResult RestoreSample RestoreTest Result
+syn keyword limsbasicBuiltInFunction ResultFld ResultFlds Right Rnd RollUpRoles
+syn keyword limsbasicBuiltInFunction Round RoundOddUp RoundSigFigs RoundSigFigsOddUp RoundTo
+syn keyword limsbasicBuiltInFunction RoundToNoExp RunReport RunTableManagerReports SQL SQLSelect
+syn keyword limsbasicBuiltInFunction SampleFieldValuesFromRules SampleFld Save SaveBatch SelectAliquot
+syn keyword limsbasicBuiltInFunction SelectFromArray SelectRecord SelectSample SelectTest SemaphoreGet
+syn keyword limsbasicBuiltInFunction SemaphoreHasWaits SemaphoreRelease SemaphoreSignal SemaphoreWait SendComm
+syn keyword limsbasicBuiltInFunction SendKeys SendMail SendSMTPMailMessage ServerDir SetAccessFunctionIds
+syn keyword limsbasicBuiltInFunction SetActiveTaskTab SetAuditReason SetAuditReasonForObject SetCellColor SetCellValue
+syn keyword limsbasicBuiltInFunction SetConstant SetDBEntryFieldWhereClause SetFieldColor SetFocusOnWindow SetGlobalVariable
+syn keyword limsbasicBuiltInFunction SetGridCellColors SetGridColumnHeaders SetGridFonts SetGridRowLabels SetGridTextColors
+syn keyword limsbasicBuiltInFunction SetGridValues SetGroups SetLabelPrinterConfig SetListEntryFieldList SetMaxLimit
+syn keyword limsbasicBuiltInFunction SetMinLimit SetNLS SetNotebookRef SetOrCreateBatchResult SetOrCreateProjectResult
+syn keyword limsbasicBuiltInFunction SetOrCreateResult SetReportsDir SetResult SetResultUnits SetRoles
+syn keyword limsbasicBuiltInFunction SetSampleDisplayFields SetTestAuditReason SetTestDisplayFields SetVariable ShellCommand
+syn keyword limsbasicBuiltInFunction ShiftBatchObject ShowWindow Shutdown ShutdownHard Sin
+syn keyword limsbasicBuiltInFunction Slope Space SplitLot SplitPdf SqlToXML
+syn keyword limsbasicBuiltInFunction Sqr StatusMessage Std Str StrNoExp
+syn keyword limsbasicBuiltInFunction StringReplace StripChars Subroutine Sum TableFields
+syn keyword limsbasicBuiltInFunction TakeInstrumentOffLine TakeSampleOffHold Tan TestFld TestFlds
+syn keyword limsbasicBuiltInFunction Time ToXML Trace TransformXML TriggerFormatCalculation
+syn keyword limsbasicBuiltInFunction Trim Trunc UCase UTCDateTime UTCOffset
+syn keyword limsbasicBuiltInFunction Ubound UnLockOrder UnicodeToAscii UnloadDebuggingSet UnreceiveSample
+syn keyword limsbasicBuiltInFunction UnreleaseSample UpdateActiveFlagForApprovedRecords UpdateAnalysisApprovalExpiration UpdateAssociatedTableFlds UpdateBatchFld
+syn keyword limsbasicBuiltInFunction UpdateBatchResultFld UpdateEntryField UpdateIncrementsFromSequences
+syn keyword limsbasicBuiltInFunction UpdateInstrumentApprovalExpiration UpdateInstrumentFld UpdateInventory
+syn keyword limsbasicBuiltInFunction UpdateInvestigationFld UpdateInvestigationItemFld UpdateLotFld
+syn keyword limsbasicBuiltInFunction UpdateLotSamplingPointFld UpdateNumericEntry UpdateOrderFld UpdateOrderFlds UpdateOrderItemFld
+syn keyword limsbasicBuiltInFunction UpdateProduct UpdateProgressDialog UpdateProjectFld UpdateProjectFlds UpdateProjectItemFld
+syn keyword limsbasicBuiltInFunction UpdateProjectResultFld UpdateResultFld UpdateSampleFld UpdateSampleFlds UpdateStandardFld
+syn keyword limsbasicBuiltInFunction UpdateTableFlds UpdateTestFld UpdateTestFlds UserDialog UserGrid
+syn keyword limsbasicBuiltInFunction UserWindow Val ValidAnalysesAndVariationsForSampleFields ValidAnalysesForSample ValidAnalysesForSampleFields
+syn keyword limsbasicBuiltInFunction ValidTestListsForSample ValidTestListsForSampleFields VarValue VerifyUser ViewSample
+syn keyword limsbasicBuiltInFunction Wait WaitComm WaitForFile WhereUsed WindowMenuItemNames
+syn keyword limsbasicBuiltInFunction WindowMenuNames WindowsSupportingAutomationScripts WindowsUserName WorkDaysBetweenDates XMLAddTagToMessage
+syn keyword limsbasicBuiltInFunction XMLAddTagValueToMessage XMLCloseTagInMessage XMLCreateMessage XMLEscape XMLMessageContents
+syn keyword limsbasicBuiltInFunction XMLParse XMLQuery XMLUnescape Yintercept
+syn keyword limsbasicTodo contained  TODO
+syn cluster limsbasicFunctionCluster contains=limsbasicBuiltInFunction,limsbasicGenericFunction
+
+syn keyword	Conditional		if elseif else then endif selectcase case endselect
+syn keyword	Repeat			do while loop wend for next
+
+syn keyword	limsbasicTypeSpecifier	break continue declare gosub return select where and order by 
+"syn keyword	limsbasicDefine
+"
+" catch errors caused by wrong parenthesis
+"
+syn cluster	limsbasicParenGroup	contains=limsbasicParenError,limsbasicIncluded,limsbasicSpecial,limsbasicTodo,limsbasicUserCont,limsbasicUserLabel,limsbasicBitField
+syn region	limsbasicParen		transparent start='(' end=')' contains=ALLBUT,@bParenGroup
+syn match	limsbasicParenError	")"
+syn match	limsbasicInParen	contained "[{}]"
+"
+" integer number
+"
+syn match	limsbasicInteger	"\<\d\+\(u\=l\=\|lu\|f\)\>"
+"
+" String and Character contstants
+"
+syn region	limsbasicString		start='"' end='"' contains=limsbasicSpecial,limsbasicTodo
+syn region	limsbasicString		start="'" end="'" contains=limsbasicSpecial,limsbasicTodo
+"
+" Comments
+"
+"syn match	limsbasicSpecial	contained "\\."
+syn region	limsbasicComment	start="^rem" end="$" contains=limsbasicSpecial,limsbasicTodo
+syn region 	limsbasicComment	start=":\s*rem" end="$" contains=limsbasicSpecial,limsbasicTodo
+syn region	limsbasicComment	start="\s*'" end="$" contains=limsbasicSpecial,limsbasicTodo
+syn region	limsbasicComment	start="^'" end="$" contains=limsbasicSpecial,limsbasicTodo
+"
+" Now do the comments and labels
+"
+syn match	limsbasicLabel		"^\d"
+syn region	limsbasicLineNumber	start="^\d" end="\s"
+"
+" Pre-compiler options : FreeBasic
+"
+syn region	limsbasicPreCondit	start="^\s*#\s*\(if\>\|ifdef\>\|ifndef\>\|elif\>\|else\>\|endif\>\)" skip="\\$" end="$" contains=limsbasicString,limsbasicCharacter,limsbasicNumber,limsbasicCommentError,limsbasicSpaceError
+syn match	limsbasicInclude	"^\s*#\s*include\s*"
+"
+" Create the clusters
+"
+syn cluster 	limsbasicNumber 	contains=limsbasicHex,limsbasicInteger,limsbasicFloat
+syn cluster	limsbasicError		contains=limsbasicHexError
+"
+" Used with OPEN statement
+"
+syn match   	limsbasicFilenumber  	"#\d\+"
+"
+" Arithmetic operations
+"
+syn match	limsbasicMathOperator	"[\+\-\=\|\*\/\>\<\%\()[\]]" contains=limsbasicParen
+"
+" The default methods for highlighting.  Can be overridden later
+"
+hi def link limsbasicLabel		Label
+hi def link limsbasicConditional	Conditional
+hi def link limsbasicRepeat		Repeat
+hi def link limsbasicHex		Number
+hi def link limsbasicInteger		Number
+hi def link limsbasicFloat		Number
+hi def link limsbasicError		Error
+hi def link limsbasicHexError		Error
+hi def link limsbasicStatement		Statement
+hi def link limsbasicString		String
+hi def link limsbasicComment		Comment
+hi def link limsbasicLineNumber		Comment
+hi def link limsbasicSpecial		Special
+hi def link limsbasicTodo		Todo
+hi def link limsbasicGenericFunction	Function
+hi def link limsbasicBuiltInFunction	Function
+hi def link limsbasicTypeSpecifier	Type
+hi def link limsbasicDefine		Type
+hi def link limsbasicInclude		Include
+hi def link limsbasicIdentifier		Identifier
+hi def link limsbasicFilenumber		limsbasicTypeSpecifier
+hi def link limsbasicMathOperator	Operator
+
+let b:current_syntax = "limsbasic"
+
+" vim: ts=8
