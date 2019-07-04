@@ -4,7 +4,7 @@
 "    \ \ / /| | '_ ` _ \| '__/ __|
 "     \ V / | | | | | | | | | (__
 "  ____\_/  |_|_| |_| |_|_|  \___|
-" |_____|                                                                        2019Jun29
+" |_____|                                                                        2019Jul04
 " ========================================================================================
 
 set nocompatible
@@ -54,6 +54,7 @@ Plug 'kkoenig/wimproved.vim'
 Plug 'bling/vim-bufferline'
 Plug 'dracula/vim'
 Plug 'enricobacis/vim-airline-clock'
+Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 
 " NERDTree
@@ -63,7 +64,7 @@ let NERDTreeShowHidden = 1                      " show hidden files
 let NERDTreeKeepTreeInNewTab = 1                " keep tree in new tab
 
 " Airline
-let g:airline_theme='deus'                      " set theme
+let g:airline_theme='dracula'                      " set theme
 let g:airline#extenstions#tabline#enabled = 1   " enable tab line
 
 if has('gui_running')
