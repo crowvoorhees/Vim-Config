@@ -4,10 +4,43 @@
 "    \ \ / /| | '_ ` _ \| '__/ __|
 "     \ V / | | | | | | | | | (__
 "  ____\_/  |_|_| |_| |_|_|  \___|
-" |_____|                                                                        2019Jun29
+" |_____|                                                                        2019Jul04
 " ========================================================================================
 
 set nocompatible
+
+" gVim Windows Behavior{{{
+if has( 'gui_running' )
+  source $VIMRUNTIME/vimrc_example.vim
+  source $VIMRUNTIME/mswin.vim
+  behave mswin
+
+  set diffexpr=MyDiff()
+  function! MyDiff()
+    let opt = '-a --binary '
+    if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+    if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+      let arg1 = v:fname_in
+    if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+      let arg2 = v:fname_new
+    if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+      let arg3 = v:fname_out
+    if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+      let eq = ''
+    if $VIMRUNTIME =~ ' '
+      if &sh =~ '\<cmd'
+        let cmd = '""' . $VIMRUNTIME . '\diff"'
+        let eq = '"'
+      else
+        let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+      endif
+    else
+      let cmd = $VIMRUNTIME . '\diff'
+    endif
+    silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
+  endfunction
+endif
+"}}}
 
 "Plugins{{{
 call plug#begin()
@@ -20,6 +53,8 @@ Plug 'junegunn/limelight.vim'
 Plug 'kkoenig/wimproved.vim'
 Plug 'bling/vim-bufferline'
 Plug 'dracula/vim'
+Plug 'enricobacis/vim-airline-clock'
+Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 
 " NERDTree
@@ -29,7 +64,7 @@ let NERDTreeShowHidden = 1                      " show hidden files
 let NERDTreeKeepTreeInNewTab = 1                " keep tree in new tab
 
 " Airline
-let g:airline_theme='deus'                      " set theme
+let g:airline_theme='dracula'                      " set theme
 let g:airline#extenstions#tabline#enabled = 1   " enable tab line
 
 if has('gui_running')
@@ -42,9 +77,35 @@ autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 "}}}
 
-" UI{{{
+" General Settings{{{
 syntax on                                       " enable sytnax
 filetype plugin indent on                       " automatically detect file types
+set number relativenumber                       " enable hybrid line number (VIM 7.4)
+set cursorline                                  " highlight current line
+set virtualedit=onemore                         " give one virtual space at end of line
+set laststatus=2                                " always show statusline
+set backspace=indent,eol,start                  " allow backspace to go to previous line
+set hidden                                      " hide buffers instead of closing them
+setlocal cm=blowfish2                           " set encryption type
+"}}}
+
+" Formatting{{{
+set listchars=eol:¬,trail:·,nbsp:·,tab:>.       " format to display hidden whitespace
+set list                                        " display hidden whitespace
+set textwidth=0                                 " disable default text width
+set nowrap                                      " disable automatic line wrap
+set autoindent                                  " automatically indent new lines
+set smartindent                                 " enable smart indenting
+set softtabstop=2                               " set soft tab to 2 spaces
+set shiftwidth=2                                " set shift width to 2 spaces
+set tabstop=4                                   " set tab to 2 spaces
+set expandtab                                   " expand tabs to spaces
+set nosmarttab                                  " disable smart tabs
+set formatoptions+=n                            " support for numbered/bullet lists
+match ErrorMsg '\s\+$'                          " highlight empty spaces
+"}}}
+
+" UI{{{
 colorscheme dracula                             " set syntax theme
 set background=dark                             " set background tone
 set shortmess+=I                                " remove splash screen
@@ -67,40 +128,6 @@ else
 endif
 "}}}
 
-" Formatting{{{
-set listchars=eol:¬,trail:·,nbsp:·,tab:>.       " format to display hidden whitespace
-set list                                        " display hidden whitespace
-set textwidth=0                                 " disable default text width
-set nowrap                                      " disable automatic line wrap
-set autoindent                                  " automatically indent new lines
-set smartindent                                 " enable smart indenting
-set softtabstop=2                               " set soft tab to 2 spaces
-set shiftwidth=2                                " set shift width to 2 spaces
-set tabstop=4                                   " set tab to 2 spaces
-set expandtab                                   " expand tabs to spaces
-set nosmarttab                                  " disable smart tabs
-set formatoptions+=n                            " support for numbered/bullet lists
-match ErrorMsg '\s\+$'                          " highlight empty spaces
-"}}}
-
-" General Settings{{{
-set number relativenumber                       " enable hybrid line number (VIM 7.4)
-set cursorline                                  " highlight current line
-set virtualedit=onemore                         " give one virtual space at end of line
-set laststatus=2                                " always show statusline
-set backspace=indent,eol,start                  " allow backspace to go to previous line
-set hidden                                      " hide buffers instead of closing them
-setlocal cm=blowfish2                           " set encryption type
-"}}}
-
-"  Search{{{
-let @/ = ""                                     " clear last search pattern on startup
-set incsearch                                   " find as you type
-set ignorecase                                  " case insensitive search
-set smartcase                                   " case sensitive when uppercase present
-set hlsearch                                    " pattern highlighting
-"}}}
-
 " Backups{{{
 set nobackup                                   " do not keep backups after close
 set nowritebackup                              " do not backup while working
@@ -111,6 +138,14 @@ set directory=$HOME//
 if has( "win32" )
   set directory=$HOME\\
 endif
+"}}}
+
+"  Search{{{
+let @/ = ""                                     " clear last search pattern on startup
+set incsearch                                   " find as you type
+set ignorecase                                  " case insensitive search
+set smartcase                                   " case sensitive when uppercase present
+set hlsearch                                    " pattern highlighting
 "}}}
 
 " Folding{{{
@@ -156,6 +191,33 @@ nnoremap <silent> <c-h> :wincmd h<return>
 nnoremap <silent> <c-l> :wincmd l<return>
 "}}}
 
+" Functions{{{
+" gVim fullscreen toggle (defaults to off)
+let g:fullScreened = 0
+function! ToggleFullScreen()
+  if g:fullScreened == 0
+    let g:fullScreened = 1
+    simalt ~x
+  else
+    let g:fullScreened = 0
+    simalt ~r
+  endif
+endfunction
+
+" gVim menu bar toggle (defaults to off)
+set guioptions-=m
+let g:MenuEnabled = 0
+function! ToggleGuiMenu()
+  if g:MenuEnabled == 0
+    set guioptions+=m
+    let g:MenuEnabled = 1
+  else
+    set guioptions-=m
+    let g:MenuEnabled = 0
+  endif
+endfunction
+"}}}
+
 " Function Keys{{{
 " F2: toggle NERDTree starting in $HOME (requires NERDTree plugin)
 nnoremap <F2> :NERDTreeToggle $HOME\<cr>
@@ -184,66 +246,6 @@ if has( 'gui_running' )
 
   " ESC: clear search highlight
   nnoremap <esc> :noh<cr><esc>
-endif
-"}}}
-
-" Functions{{{
-" gVim fullscreen toggle (defaults to off)
-let g:fullScreened = 0
-function! ToggleFullScreen()
-  if g:fullScreened == 0
-    let g:fullScreened = 1
-    simalt ~x
-  else
-    let g:fullScreened = 0
-    simalt ~r
-  endif
-endfunction
-
-" gVim menu bar toggle (defaults to off)
-set guioptions-=m
-let g:MenuEnabled = 0
-function! ToggleGuiMenu()
-  if g:MenuEnabled == 0
-    set guioptions+=m
-    let g:MenuEnabled = 1
-  else
-    set guioptions-=m
-    let g:MenuEnabled = 0
-  endif
-endfunction
-"}}}
-
-" gVim Windows Behavior{{{
-if has( 'gui_running' )
-  source $VIMRUNTIME/vimrc_example.vim
-  source $VIMRUNTIME/mswin.vim
-  behave mswin
-
-  set diffexpr=MyDiff()
-  function! MyDiff()
-    let opt = '-a --binary '
-    if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-    if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-      let arg1 = v:fname_in
-    if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-      let arg2 = v:fname_new
-    if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-      let arg3 = v:fname_out
-    if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-      let eq = ''
-    if $VIMRUNTIME =~ ' '
-      if &sh =~ '\<cmd'
-        let cmd = '""' . $VIMRUNTIME . '\diff"'
-        let eq = '"'
-      else
-        let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-      endif
-    else
-      let cmd = $VIMRUNTIME . '\diff'
-    endif
-    silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
-  endfunction
 endif
 "}}}
 
