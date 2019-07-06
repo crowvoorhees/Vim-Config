@@ -1,12 +1,11 @@
-" ========================================================================================
+" ==============================================================================
 "   __     ___
 "   \ \   / (_)_ __ ___  _ __ ___
 "    \ \ / /| | '_ ` _ \| '__/ __|
 "     \ V / | | | | | | | | | (__
 "  ____\_/  |_|_| |_| |_|_|  \___|
-" |_____|                                                                        2019Jul04
-" ========================================================================================
-
+" |_____|                                                              2019Jul06
+" ==============================================================================
 set nocompatible
 
 " gVim Windows Behavior{{{
@@ -64,7 +63,7 @@ let NERDTreeShowHidden = 1                      " show hidden files
 let NERDTreeKeepTreeInNewTab = 1                " keep tree in new tab
 
 " Airline
-let g:airline_theme='dracula'                      " set theme
+let g:airline_theme='dracula'                   " set theme
 let g:airline#extenstions#tabline#enabled = 1   " enable tab line
 
 if has('gui_running')
@@ -94,6 +93,7 @@ set listchars=eol:¬,trail:·,nbsp:·,tab:>.       " format to display hidden white
 set list                                        " display hidden whitespace
 set textwidth=0                                 " disable default text width
 set nowrap                                      " disable automatic line wrap
+set colorcolumn=81                              " display column at character length
 set autoindent                                  " automatically indent new lines
 set smartindent                                 " enable smart indenting
 set softtabstop=2                               " set soft tab to 2 spaces
@@ -117,7 +117,7 @@ set splitbelow                                  " split window to the bottom of 
 if has( 'gui_running' )
   set visualbell t_vb=                          " disable beep and flash
   set mouse=a                                   " automatically enable mouse usage
-  set guifont=Hack:h10                          " set font type
+  set guifont=Dina\ ttf\ 10px:h12                          " set font type
   set guioptions-=T                             " remove toolbar
   set guioptions-=r                             " remove right scrollbar
   set guioptions-=L                             " remove left scrollbar
@@ -158,6 +158,7 @@ set foldmethod=syntax
 " Custom Syntax{{{
 autocmd BufNewFile,BufRead *.lb set syntax=limsbasic
 autocmd BufRead todo set syntax=todo
+autocmd BufWritePost $MYVIMRC source $MYVIMRC
 "}}}
 
 " Leader Mapping{{{
@@ -189,6 +190,9 @@ nnoremap <silent> <c-k> :wincmd k<return>
 nnoremap <silent> <c-j> :wincmd j<return>
 nnoremap <silent> <c-h> :wincmd h<return>
 nnoremap <silent> <c-l> :wincmd l<return>
+
+" folding
+nnoremap <space> za
 "}}}
 
 " Functions{{{
