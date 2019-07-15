@@ -54,6 +54,7 @@ Plug 'bling/vim-bufferline'
 Plug 'dracula/vim'
 Plug 'enricobacis/vim-airline-clock'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'arcticicestudio/nord-vim'
 call plug#end()
 
 " NERDTree
