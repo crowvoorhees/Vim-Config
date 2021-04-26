@@ -11,11 +11,14 @@ set nocompatible
 
 " gVim Windows Behavior{{{
 if has( 'gui_running' )
-  source $VIMRUNTIME/mswin.vim
+  runtime mswin.vim
   behave mswin
 endif
 
-set diffexpr=MyDiff()
+if &diffopt !~# 'internal'
+  set diffexpr=MyDiff()
+endif
+
 function MyDiff()
   let opt = '-a --binary '
   if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
@@ -52,18 +55,21 @@ endfunction
 
 "Plugins{{{
 call plug#begin()
+if has('gui_running')
+  Plug 'bling/vim-bufferline'
+  Plug 'enricobacis/vim-airline-clock'
+  Plug 'junegunn/goyo.vim'
+  Plug 'junegunn/limelight.vim'
+endif
+Plug 'itchyny/calendar.vim'
+Plug 'morhetz/gruvbox'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
-Plug 'morhetz/gruvbox'
-Plug 'ajmwagar/vim-deus'
-Plug 'junegunn/goyo.vim'
-Plug 'junegunn/limelight.vim'
-Plug 'kkoenig/wimproved.vim'
-Plug 'bling/vim-bufferline'
-Plug 'dracula/vim'
-Plug 'enricobacis/vim-airline-clock'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'arcticicestudio/nord-vim'
+"Plug 'ajmwagar/vim-deus'
+"Plug 'arcticicestudio/nord-vim'
+"Plug 'gruvbox/vim'
+"Plug 'kkoenig/wimproved.vim'
 call plug#end()
 
 " NERDTree
@@ -73,7 +79,7 @@ let NERDTreeShowHidden = 1                      " show hidden files
 let NERDTreeKeepTreeInNewTab = 1                " keep tree in new tab
 
 " Airline
-let g:airline_theme='dracula'                   " set theme
+let g:airline_theme='gruvbox'                   " set theme
 let g:airline#extenstions#tabline#enabled = 1   " enable tab line
 
 if has('gui_running')
@@ -116,7 +122,7 @@ match ErrorMsg '\s\+$'                          " highlight empty spaces
 "}}}
 
 " UI{{{
-colorscheme dracula                             " set syntax theme
+colorscheme gruvbox                             " set syntax theme
 set background=dark                             " set background tone
 set shortmess+=I                                " remove splash screen
 set showmatch                                   " show matching brackets/parenthesis
@@ -127,7 +133,7 @@ set splitbelow                                  " split window to the bottom of 
 if has( 'gui_running' )
   set visualbell t_vb=                          " disable beep and flash
   set mouse=a                                   " automatically enable mouse usage
-  set guifont=Dina\ ttf\ 10px:h12                          " set font type
+  set guifont=Fira\ Mono:h10                    " set font type
   set guioptions-=T                             " remove toolbar
   set guioptions-=r                             " remove right scrollbar
   set guioptions-=L                             " remove left scrollbar
@@ -136,7 +142,7 @@ else
   set noerrorbells visualbell t_vb=             " disable beep and flash
   set t_Co=256                                  " enable color 256
 endif
-"}}} 
+"}}}
 
 " Backups{{{
 set nobackup                                   " do not keep backups after close
