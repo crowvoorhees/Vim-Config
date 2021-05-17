@@ -187,8 +187,8 @@ nnoremap <leader>n A<cr>- [ ]
 " todo list: sort + save list
 nnoremap <leader>s :sort<cr>:w<cr>
 
-" remove trainling white space
-nnoremap <leader>w :%s/\s*$//<cr>
+" remove trailing white space
+nnoremap <leader>w :%s/\s*$//<cr>:noh<cr><esc>
 "}}}
 
 " Key Mapping{{{
@@ -244,6 +244,7 @@ endfunction
 " Function Keys{{{
 " F2: toggle NERDTree starting in $HOME (requires NERDTree plugin)
 nnoremap <F2> :NERDTreeToggle $HOME\<cr>
+
 " F3: toggle Goyo view (requires Goyo plugin)
 nnoremap <F3> :Goyo<cr>
 
