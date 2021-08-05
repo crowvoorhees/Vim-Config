@@ -83,8 +83,8 @@ let g:airline_theme='gruvbox'                   " set theme
 let g:airline#extenstions#tabline#enabled = 1   " enable tab line
 
 if has('gui_running')
-  let g:airline_left_sep='›'                    " customize left separator
-  let g:airline_right_sep='‹'                   " customize right separator
+  let g:airline_left_sep='>'                    " customize left separator
+  let g:airline_right_sep='<'                   " customize right separator
 endif
 
 " Limelight
