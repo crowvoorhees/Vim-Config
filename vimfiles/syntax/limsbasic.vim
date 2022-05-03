@@ -195,7 +195,7 @@ syn keyword limsbasicBuiltInFunction Wait WaitComm WaitForFile WhereUsed WindowM
 syn keyword limsbasicBuiltInFunction WindowMenuNames WindowsSupportingAutomationScripts WindowsUserName WorkDaysBetweenDates XMLAddTagToMessage
 syn keyword limsbasicBuiltInFunction XMLAddTagValueToMessage XMLCloseTagInMessage XMLCreateMessage XMLEscape XMLMessageContents
 syn keyword limsbasicBuiltInFunction XMLParse XMLQuery XMLUnescape Yintercept
-syn keyword limsbasicTodo contained  TODO
+syn keyword limsbasicTodo contained  TODO FIXME OPTIMIZE BUG REVIEW DOCME TESTME
 syn cluster limsbasicFunctionCluster contains=limsbasicBuiltInFunction,limsbasicGenericFunction
 
 syn keyword	Conditional		if elseif else then endif selectcase case endselect
